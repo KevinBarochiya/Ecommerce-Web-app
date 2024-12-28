@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
+const config=require("config");
+const dbgr= require("debug")("development:mongoose");
 
 mongoose
-.connect("mongodb://127.0.0.1:27017/mega")
+.connect(`${config.get("mongodb_uri")}/mega`)
 .then(function(){
-    console.log("running");
+    dbgr("running");
 })
 .catch(function(err){
     console.log(err);
