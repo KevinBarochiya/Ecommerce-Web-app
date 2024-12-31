@@ -30,4 +30,4 @@ app.use("/owners",ownersrouter);
 app.use("/users",usersrouter);
 app.use("/products",productsrouter);
 
-app.listen(3000);
+app.listen(process.env.PORT);
