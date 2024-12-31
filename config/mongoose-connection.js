@@ -3,7 +3,7 @@ const config=require("config");
 const dbgr= require("debug")("development:mongoose");
 
 mongoose
-.connect(`${config.get("mongodb_uri")}/mega`)
+.connect(`${process.env.MONGODB_URI}/mega`)
 .then(function(){
     dbgr("running");
 })
