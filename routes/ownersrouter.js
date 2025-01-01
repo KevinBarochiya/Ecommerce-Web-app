@@ -3,7 +3,7 @@ const router=express.Router();
 const ownermodel=require("../models/ownermodel");
 const bcrypt=require("bcryptjs");
     router.get("/create",function(req,res){
-        res.render("owner-login");
+        res.render("owner-login",{loggedin:false});
     });
 
     router.post("/create",async function(req,res){
@@ -38,7 +38,7 @@ const bcrypt=require("bcryptjs");
 
 router.get("/admin", function (req, res) {
     const success = req.flash("success"); 
-    res.render("createproducts", { success });
+    res.render("createproducts", { success,loggedin:false});
 });
 
 module.exports=router;

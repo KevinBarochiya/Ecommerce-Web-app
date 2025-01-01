@@ -1,11 +1,23 @@
 <%- include('./partials/header') %>
 <% if(success.length>0){ %>
-    <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-blue-500">
+    <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-blue-500" id="AB">
         <span class="inline-block mt-1 mb-1 text-white">
             <%= success %>
         </span>
     </div>
 <% } %>    
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const flashMessage = document.getElementById("AB");
+        if (flashMessage) {
+            setTimeout(() => {
+                flashMessage.style.transition = "opacity 0.5s ease";
+                flashMessage.style.opacity = "0";
+                setTimeout(() => flashMessage.remove(), 500); // Remove after fade-out
+            }, 1500); // Display for 1.5 seconds
+        }
+    });
+</script>
 
 <div class="w-full h-screen flex items-start px-20 py-20">
         <div class="w-[25%] flex h-screen flex-col items-start">
