@@ -1,6 +1,7 @@
 const express= require("express");
 const router=express.Router();
 const ownermodel=require("../models/ownermodel");
+const productmodel=require("../models/productmodel");
 const bcrypt=require("bcryptjs");
     router.get("/create",function(req,res){
         res.render("owner-login",{loggedin:false});
@@ -36,9 +37,10 @@ const bcrypt=require("bcryptjs");
     }
     });
 
-router.get("/admin", function (req, res) {
+router.get("/admin",async function (req, res) {
     const success = req.flash("success"); 
-    res.render("createproducts", { success,loggedin:false});
+    const product = await productmodel.find();
+    res.render("createproducts", { success,loggedin:false,product});
 });
 
 module.exports=router;
