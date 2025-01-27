@@ -82,4 +82,28 @@
     </div>
 </div>
 
+<table class="w-full border-collapse border border-gray-300">
+    <thead>
+        <tr class="bg-gray-100">
+            <th class="border border-gray-300 px-4 py-2 text-left">User</th>
+            <th class="border border-gray-300 px-4 py-2 text-left">Product</th>
+            <th class="border border-gray-300 px-4 py-2 text-center">Quantity</th>
+            <th class="border border-gray-300 px-4 py-2 text-center">Total Price</th>
+            <th class="border border-gray-300 px-4 py-2 text-center">Purchase Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% purchases.forEach(function(purchase) { %>
+        <tr>
+            <td class="border border-gray-300 px-4 py-2"><%= purchase.userId %></td>
+            <td class="border border-gray-300 px-4 py-2"><%= purchase.productId %></td>
+            <td class="border border-gray-300 px-4 py-2 text-center"><%= purchase.quantity %></td>
+            <td class="border border-gray-300 px-4 py-2 text-center">₹ <%= purchase.totalPrice %></td>
+            <td class="border border-gray-300 px-4 py-2 text-center"><%= purchase.purchaseDate.toDateString() %></td>
+        </tr>
+        <% }) %>
+    </tbody>
+</table>
+
+
 <%- include('./partials/footer') %>
