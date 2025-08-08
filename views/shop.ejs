@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="relative w-full h-64 bg-gray-100 flex items-center justify-center">
                     <% if(product.discount){ %>
                         <span class="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded">
-                            <%= product.discount %>% OFF
+                            <%= product.discount %> Rs OFF
                         </span>
                     <% } %>
                     <img src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="<%= product.name %>" class="max-h-56 object-contain">
