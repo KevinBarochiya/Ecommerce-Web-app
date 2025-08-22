@@ -74,17 +74,31 @@ document.addEventListener("DOMContentLoaded", function () {
         <!-- Sort Bar -->
         <div class="flex justify-between items-center mb-6">
             <div class="flex gap-2">
-                <button class="px-4 py-1 border rounded hover:bg-gray-100">New Arrivals</button>
-                <button class="px-4 py-1 border rounded bg-yellow-100">Recommended</button>
-                <button class="px-4 py-1 border rounded hover:bg-gray-100">Price: High to Low</button>
-                <button class="px-4 py-1 border rounded hover:bg-gray-100">Price: Low to High</button>
-                <button class="px-4 py-1 border rounded hover:bg-gray-100">On Discount</button>
+                <a href="/shop?sort=new" 
+                class="px-4 py-1 border rounded <%= (req.query.sort === 'new') ? 'bg-yellow-100' : 'hover:bg-gray-100' %>">
+                New Arrivals
+                </a>
+
+                <a href="/shop?sort=price-desc" 
+                class="px-4 py-1 border rounded <%= (req.query.sort === 'price-desc') ? 'bg-yellow-100' : 'hover:bg-gray-100' %>">
+                Price: High to Low
+                </a>
+
+                <a href="/shop?sort=price-asc" 
+                class="px-4 py-1 border rounded <%= (req.query.sort === 'price-asc') ? 'bg-yellow-100' : 'hover:bg-gray-100' %>">
+                Price: Low to High
+                </a>
+
+                <a href="/shop?sort=discount" 
+                class="px-4 py-1 border rounded <%= (req.query.sort === 'discount') ? 'bg-yellow-100' : 'hover:bg-gray-100' %>">
+                On Discount
+                </a>
             </div>
             <div class="flex items-center gap-3 text-gray-500">
                 <i class="ri-grid-fill"></i>
                 <i class="ri-list-unordered"></i>
             </div>
-        </div>
+            </div>
 
         <!-- Product Grid -->
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

@@ -11,9 +11,37 @@ router.get("/",function(req,res){
 });
 
 router.get("/shop", isLoggedin, async function (req, res) {
-    const products = await productmodel.find();
-    const success= await req.flash("success");
-    res.render("shop", { products,success });
+  let sort = {};
+  let filter = {};
+  let products;   // ✅ only declare, don’t initialize with []
+
+  switch (req.query.sort) {
+    case "price-asc":
+      sort = { price: 1 };
+      products = await productmodel.find(filter).sort(sort);
+      break;
+
+    case "price-desc":
+      sort = { price: -1 };
+      products = await productmodel.find(filter).sort(sort);
+      break;
+
+    case "new":
+      sort = { createdAt: -1 };
+      products = await productmodel.find(filter).sort(sort);
+      break;
+
+    case "discount":
+      filter = { discount: { $gt: 0 } };
+      products = await productmodel.find(filter);
+      break;
+
+    default:
+      products = await productmodel.find();
+  }
+
+  const success = await req.flash("success");
+  res.render("shop", { products, success, req });
 });
 
 router.get("/cart", isLoggedin, async function (req, res) {
