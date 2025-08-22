@@ -1,50 +1,103 @@
 <%- include('./partials/header') %>
 
-    <% if(error.length>0){ %>
-        <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-red-500">
-            <span class="inline-block mt-1 mb-1 text-white">
-                <%= error %>
-            </span>
-        </div>
-        <% } %>
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <!-- Card -->
+  <div class="bg-white shadow-xl rounded-2xl w-full max-w-6xl overflow-hidden flex flex-col md:flex-row">
     
-            <div class="w-full flex justify-between px-5 py-3 text-red-600">
-                <a href="/owners/create">Owner-Login</a>
-            </div>
-            <div class="w-full h-screen flex px-20">
-                <div class="w-1/2 flex items-center justify-center h-screen">
-                    <div class="w-full px-32">
-                        <h3 class="text-4xl">welcome to <span class="text-blue-400 font-semibold">Scatch</span></h3>
-                        <h4 class="text-2xl mb-5">create your account</h4>
-                        <form autocomplete="off" action="/users/register" method="post">
-                            <input
-                                class="bg-zinc-100 block w-full px-3 py-2 border-[1px] rounded-md mb-3 border-zinc-200"
-                                type="text" placeholder="Full Name" name="fullname">
-                            <input
-                                class="bg-zinc-100 block w-full px-3 py-2 border-[1px] rounded-md mb-3 border-zinc-200"
-                                type="email" placeholder="Email" name="email">
-                            <input
-                                class="bg-zinc-100 block w-full px-3 py-2 border-[1px] rounded-md mb-3 border-zinc-200"
-                                type="password" placeholder="Password" name="password">
-                            <input class="px-5 rounded-full py-3 mt-2 bg-blue-500 text-white" type="submit"
-                                value="Create My Account">
-                        </form>
-                    </div>
-                </div>
-                <div class="w-1/2 flex items-center justify-center h-screen">
-                    <div class="w-full px-32">
-                        <h4 class="text-2xl capitalize mb-5">login your account</h4>
-                        <form autocomplete="off" action="/users/login" method="post">
-                            <input
-                                class="block bg-zinc-100 w-full px-3 py-2 border-[1px] rounded-md mb-3 border-zinc-200"
-                                type="email" placeholder="Email" name="email">
-                            <input
-                                class="block bg-zinc-100 w-full px-3 py-2 border-[1px] rounded-md mb-3 border-zinc-200"
-                                type="password" placeholder="Password" name="password">
-                            <input class="px-5 block rounded-full py-3 mt-2 bg-blue-500 text-white" type="submit"
-                                value="Login">
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <%- include('./partials/footer') %>
+    <!-- Left side: Welcome / Branding -->
+    <div class="hidden md:flex md:w-1/2 bg-indigo-600 items-center justify-center p-10">
+      <div class="text-center text-white">
+        <h1 class="text-4xl font-bold mb-4">Welcome to <span class="text-yellow-300">T-Trend</span></h1>
+        <p class="text-lg mb-6">Your one-stop online platform for managing everything easily.</p>
+      </div>
+    </div>
+
+    <!-- Right side: Forms -->
+    <div class="w-full md:w-1/2 p-10">
+      <!-- Flash Messages -->
+      <% if (error && error.length > 0) { %>
+        <div class="bg-red-500 text-white px-4 py-2 rounded mb-4">
+          <%= error %>
+        </div>
+      <% } %>
+      <% if (success && success.length > 0) { %>
+        <div class="bg-green-500 text-white px-4 py-2 rounded mb-4">
+          <%= success %>
+        </div>
+      <% } %>
+
+      <!-- Tabs -->
+      <div class="flex justify-around mb-6 border-b border-gray-200">
+        <button id="loginTab" class="py-2 px-4 font-semibold border-b-2 border-indigo-600 text-indigo-600">Login</button>
+        <button id="signupTab" class="py-2 px-4 font-semibold text-gray-500 hover:text-indigo-600">Signup</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" action="/users/login" method="POST" class="space-y-5">
+        <input type="email" name="email" placeholder="Email" required
+               class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        <input type="password" name="password" placeholder="Password" required
+               class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition">
+          Login
+        </button>
+        <p class="text-sm text-gray-500 text-center mt-2">
+          Don't have an account? <span id="showSignup" class="text-indigo-600 cursor-pointer hover:underline">Signup</span>
+        </p>
+      </form>
+
+      <!-- Signup Form -->
+      <form id="signupForm" action="/users/register" method="POST" class="space-y-5 hidden">
+        <input type="text" name="fullname" placeholder="Full Name" required
+               class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        <input type="email" name="email" placeholder="Email" required
+               class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        <input type="password" name="password" placeholder="Password" required
+               class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition">
+          Create My Account
+        </button>
+        <p class="text-sm text-gray-500 text-center mt-2">
+          Already have an account? <span id="showLogin" class="text-indigo-600 cursor-pointer hover:underline">Login</span>
+        </p>
+      </form>
+
+      <!-- Optional Admin Login Link -->
+      <div class="mt-6 text-center text-red-600">
+        <a href="/owners/create" class="hover:underline">Admin Login</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const loginTab = document.getElementById('loginTab');
+  const signupTab = document.getElementById('signupTab');
+  const loginForm = document.getElementById('loginForm');
+  const signupForm = document.getElementById('signupForm');
+  const showSignup = document.getElementById('showSignup');
+  const showLogin = document.getElementById('showLogin');
+
+  loginTab.addEventListener('click', () => {
+    loginForm.classList.remove('hidden');
+    signupForm.classList.add('hidden');
+    loginTab.classList.add('border-indigo-600', 'text-indigo-600');
+    loginTab.classList.remove('text-gray-500');
+    signupTab.classList.remove('border-indigo-600', 'text-indigo-600');
+    signupTab.classList.add('text-gray-500');
+  });
+
+  signupTab.addEventListener('click', () => {
+    signupForm.classList.remove('hidden');
+    loginForm.classList.add('hidden');
+    signupTab.classList.add('border-indigo-600', 'text-indigo-600');
+    signupTab.classList.remove('text-gray-500');
+    loginTab.classList.remove('border-indigo-600', 'text-indigo-600');
+    loginTab.classList.add('text-gray-500');
+  });
+
+  showSignup.addEventListener('click', () => signupTab.click());
+  showLogin.addEventListener('click', () => loginTab.click());
+</script>
+
+<%- include('./partials/footer') %>

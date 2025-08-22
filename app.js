@@ -6,6 +6,7 @@ const db= require("./config/mongoose-connection");
 const ownersrouter=require("./routes/ownersrouter");
 const usersrouter=require("./routes/usersrouter");
 const productsrouter=require("./routes/productsrouter");
+const accountrouter = require("./routes/accountrouter");
 const expressSession =require("express-session");
 const flash=require("connect-flash");
 const indexRouter=require("./routes/index")
@@ -29,5 +30,6 @@ app.use("/",indexRouter);
 app.use("/owners",ownersrouter);
 app.use("/users",usersrouter);
 app.use("/products",productsrouter);
+app.use("/account",accountrouter);
 
 app.listen(process.env.PORT);
