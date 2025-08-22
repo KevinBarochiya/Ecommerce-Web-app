@@ -13,8 +13,30 @@ router.get("/",function(req,res){
 router.get("/shop", isLoggedin, async function (req, res) {
   let sort = {};
   let filter = {};
-  let products;   // ✅ only declare, don’t initialize with []
+  let products;
 
+  // ✅ category filter first
+  if (req.query.category) {
+    switch (req.query.category) {
+      case "casual":
+        filter = { name: "CasualT" };
+        break;
+      case "polo":
+        filter = { name: "PoloT" };
+        break;
+      case "style":
+        filter = { name: "styleT" };
+        break;
+      case "printed":
+        filter = { name: "T-type" };
+        break;
+      case "recommended":
+        filter = {}; // all products
+        break;
+    }
+  }
+
+  // ✅ then apply sort if given
   switch (req.query.sort) {
     case "price-asc":
       sort = { price: 1 };
@@ -32,12 +54,12 @@ router.get("/shop", isLoggedin, async function (req, res) {
       break;
 
     case "discount":
-      filter = { discount: { $gt: 0 } };
+      filter = { ...filter, discount: { $gt: 0 } };
       products = await productmodel.find(filter);
       break;
 
     default:
-      products = await productmodel.find();
+      products = await productmodel.find(filter);
   }
 
   const success = await req.flash("success");
