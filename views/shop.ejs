@@ -62,6 +62,25 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
         </details>
 
+        <details class="mb-4">
+            <summary class="cursor-pointer font-medium">Brand</summary>
+            <div class="mt-2 space-y-1">
+                <label><a href="/shop?brand=Puma">Puma</a></label><br>
+                <label><a href="/shop?brand=Adidas">Adidas</a></label><br>
+                <label><a href="/shop?brand=USPA">USPA</a></label>
+            </div>
+        </details>
+
+        <details class="mb-4">
+            <summary class="cursor-pointer font-medium">Size</summary>
+            <div class="mt-2 space-y-1">
+                <label><a href="/shop?size=S">Small (S)</a></label><br>
+                <label><a href="/shop?size=M">Medium (M)</a></label><br>
+                <label><a href="/shop?size=L">Large (L)</a></label><br>
+                <label><a href="/shop?size=XL">Extra Large (XL)</a></label>
+            </div>
+        </details>
+
         <!-- Price -->
         <details>
             <summary class="cursor-pointer font-medium">Price</summary>
@@ -119,6 +138,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 <!-- Product Info -->
                 <div class="p-4">
                     <h3 class="text-sm font-medium text-gray-800 truncate"><%= product.name %></h3>
+                    <p class="text-xs text-gray-500">Brand: <%= product.brand %></p>
+                    <p class="text-xs text-gray-500">Size: <%= product.size %></p>
                     <div class="mt-1 flex items-center gap-2">
                         <span class="text-red-600 font-semibold">₹<%= product.price %></span>
                         <% if(product.oldprice){ %>

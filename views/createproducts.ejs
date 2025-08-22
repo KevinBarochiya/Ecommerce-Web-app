@@ -29,6 +29,27 @@
                             <input name="discount" type="text" placeholder="Discount Price" class="border p-2 rounded w-full">
                         </div>
                     </div>
+                    <div class="grid grid-cols-2 gap-4 mt-4">
+                        <!-- Gender -->
+                        <select name="gender" class="border p-2 rounded w-full">
+                            <option value="">Select Gender</option>
+                            <option name="male" value="male">Men</option>
+                            <option name="female" value="female">Women</option>
+                            <option name="unisex" value="unisex">Unisex</option>
+                        </select>
+
+                        <!-- Brand -->
+                        <input name="brand" type="text" placeholder="Brand Name" class="border p-2 rounded w-full">
+
+                        <!-- Size (multiple selection) -->
+                        <select name="size" multiple class="border p-2 rounded w-full h-32">
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+                        </select>
+                    </div>
                     <div>
                         <h3 class="text-lg font-semibold mb-2">Panel Details</h3>
                         <div class="grid grid-cols-2 gap-4">

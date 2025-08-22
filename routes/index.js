@@ -38,6 +38,15 @@ router.get("/shop", isLoggedin, async function (req, res) {
   if (req.query.gender) {
     filter = { ...filter, gender: req.query.gender };
   }
+
+  if (req.query.brand) {
+    filter.brand = req.query.brand;
+  }
+
+  // ✅ Size filter
+  if (req.query.size) {
+    filter.size = req.query.size; // works if size is string, for array use $in
+  }
   // ✅ then apply sort if given
   switch (req.query.sort) {
     case "price-asc":
