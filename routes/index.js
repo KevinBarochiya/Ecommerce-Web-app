@@ -35,7 +35,9 @@ router.get("/shop", isLoggedin, async function (req, res) {
         break;
     }
   }
-
+  if (req.query.gender) {
+    filter = { ...filter, gender: req.query.gender };
+  }
   // ✅ then apply sort if given
   switch (req.query.sort) {
     case "price-asc":
